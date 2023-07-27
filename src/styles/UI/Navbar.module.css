@@ -1,0 +1,22 @@
+.header-style {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.desktopMenu {
+  display: flex;
+}
+
+.hamburger {
+  display: none;
+}
+
+@media screen and (max-width: 480px) {
+  .desktopMenu {
+    display: none;
+  }
+  .hamburger {
+    display: block;
+  }
+}
