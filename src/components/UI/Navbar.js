@@ -1,10 +1,27 @@
 import { Breadcrumb, Button, Drawer, Layout, Menu } from "antd";
 const { Header } = Layout;
-import { DownOutlined, MenuOutlined, SmileOutlined } from "@ant-design/icons";
+import {
+  AppstoreOutlined,
+  DownOutlined,
+  MailOutlined,
+  MenuOutlined,
+  SettingOutlined,
+  SmileOutlined,
+} from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
 import Link from "next/link";
 import styles from "../../styles/UI/Navbar.module.css";
 import { useState } from "react";
+
+function getItem(label, key, icon, children, type, to) {
+    return {
+      key,
+      icon,
+      children,
+      label: type === 'link' ? <Link href={to}>{label}</Link> : label, 
+      type,
+    };
+  }
 
 const items = [
   {
@@ -73,14 +90,57 @@ const items = [
   },
 ];
 
+const mobileItems = [
+  getItem("Pc Builder", "xx", null, null, "link", "/youtube"),
+  getItem("Categories", "sub1", <MailOutlined />, [
+    getItem("CPU / Processor", "1", <MailOutlined />, null, "link", "/cpu" ),
+    getItem("Motherboard", "2", null, null, "link", "/motherboard"),
+    getItem("RAM", "3", null, null, "link", "/ram"),
+    getItem("Power Supply Unit", "4", null, null, "link", "/power-supply-unit"),
+    getItem("Storage Device", "5", null, null, "link", "/storage-device"),
+    getItem("Monitor", "6", null, null, "link", "/monitor"),
+    getItem("Others", "7", null, null, "link", "/others"),
+  ]),
+];
+
+
+// const mobileItems = [
+//     getItem('Navigation One', 'sub1', <MailOutlined />, [
+//       getItem('Item 1', 'g1', null, [getItem('Option 1', '1'), getItem('Option 2', '2')], 'group'),
+//       getItem('Item 2', 'g2', null, [getItem('Option 3', '3'), getItem('Option 4', '4')], 'group'),
+//     ]),
+//     getItem('Navigation Two', 'sub2', <AppstoreOutlined />, [
+//       getItem('Option 5', '5'),
+//       getItem('Option 6', '6'),
+//       getItem('Submenu', 'sub3', null, [getItem('Option 7', '7'), getItem('Option 8', '8')]),
+//     ]),
+//     {
+//       type: 'divider',
+//     },
+//     getItem('Navigation Three', 'sub4', <SettingOutlined />, [
+//       getItem('Option 9', '9'),
+//       getItem('Option 10', '10'),
+//       getItem('Option 11', '11'),
+//       getItem('Option 12', '12'),
+//     ]),
+//     getItem('Group', 'grp', null, [getItem('Option 13', '13'), getItem('Option 14', '14')], 'group'),
+//     getItem('PC Builder', 'builder', null, null, 'link', '/builder'), // Example link item
+//   ];
+  
+
 const Navbar = () => {
-    const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const showDrawer = () => {
     setOpen(true);
   };
   const onClose = () => {
     setOpen(false);
   };
+
+  const onClick = (e) => {
+    console.log("click ", e);
+  };
+
   return (
     <>
       <Header className={`${styles["header-style"]}`}>
@@ -88,9 +148,9 @@ const Navbar = () => {
           <span style={{ color: "white", fontWeight: 800 }}>PC</span>
           <span style={{ color: "red", fontWeight: 800 }}>Builder</span>
         </div>
-        <div
-          className={`${styles["desktopMenu"]}`}
-        >
+
+        {/* ============== Desktop Menu =============  */}
+        <div className={`${styles["desktopMenu"]}`}>
           <Dropdown
             menu={{
               items,
@@ -112,20 +172,28 @@ const Navbar = () => {
             <p style={{ color: "white", fontWeight: 600 }}>PC Builder</p>
           </Link>
         </div>
+
+        {/* ============== Mobile Menu =============  */}
         <div className={`${styles["hamburger"]}`}>
           <Button type="primary" onClick={showDrawer}>
             <MenuOutlined />
           </Button>
           <Drawer
-            title="Basic Drawer"
+            title="Close Menu"
             placement="right"
             onClose={onClose}
-            width={250}
+            width={300}
             open={open}
           >
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
+            <Menu
+              onClick={onClick}
+              style={{
+                width: 256,
+              }}
+              defaultSelectedKeys={["1"]}
+              mode="inline"
+              items={mobileItems}
+            />
           </Drawer>
         </div>
       </Header>
