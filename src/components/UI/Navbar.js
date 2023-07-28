@@ -13,6 +13,7 @@ import Link from "next/link";
 import styles from "../../styles/UI/Navbar.module.css";
 import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 function getItem(label, key, icon, children, type, to) {
   return {
@@ -126,6 +127,7 @@ const mobileItems = [
 ];
 
 const Navbar = () => {
+  const router = useRouter();
   const { data: session } = useSession();
 
   const [open, setOpen] = useState(false);
@@ -143,7 +145,7 @@ const Navbar = () => {
   return (
     <>
       <Header className={`${styles["header-style"]}`}>
-        <div className="demo-logo">
+        <div style={{cursor: "pointer"}} onClick={() => router.push("/")}>
           <span style={{ color: "white", fontWeight: 800 }}>PC</span>
           <span style={{ color: "red", fontWeight: 800 }}>Builder</span>
         </div>

@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 const SubCategory = ({ products }) => {
   const router = useRouter();
-    console.log(products);
+  // console.log(router.query.subcat);
   return (
     <div className="pageHeight content-body">
       <Row gutter={[16, 16]}>
@@ -13,6 +13,7 @@ const SubCategory = ({ products }) => {
             return (
               <Col key={product._id} xs={24} sm={12} md={8} lg={6}>
                 <Card
+                onClick={()=> router.push(`/categories/${router.query.subcat}/${product?._id}`)}
                   hoverable
                   cover={
                     <Image
