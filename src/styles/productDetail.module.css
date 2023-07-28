@@ -1,0 +1,21 @@
+.productHeader {
+  display: flex;
+  justify-content: space-around;
+
+}
+
+.productInfo {
+  font-size: x-large;
+  line-height: 1.6;
+  margin-top: "20px";
+}
+
+@media screen and (max-width: 480px) {
+  .productHeader {
+    flex-direction: column;
+  }
+  .productInfo {
+    font-size: small;
+    line-height: 1;
+  }
+}

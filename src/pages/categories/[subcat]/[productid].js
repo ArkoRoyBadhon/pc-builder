@@ -4,18 +4,13 @@ import { ArrowRightOutlined } from "@ant-design/icons";
 import { Card, Col, Divider, Rate, Row } from "antd";
 import { Image } from "antd";
 import { useRouter } from "next/router";
+import styles from "../../../styles/productDetail.module.css";
 
 const ProductDetail = ({ productDetail: pData }) => {
   const router = useRouter();
   return (
     <div className="pageHeight content-body">
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-          paddingTop: 40,
-        }}
-      >
+      <div style={{ marginTop: 20 }} className={`${styles["productHeader"]}`}>
         <div
           style={{
             display: "flex",
@@ -24,13 +19,7 @@ const ProductDetail = ({ productDetail: pData }) => {
         >
           <Image width={400} src={pData?.image} />
         </div>
-        <div
-          style={{
-            fontSize: 22,
-            lineHeight: 2,
-            paddingTop: 30,
-          }}
-        >
+        <div style={{ marginTop: 20 }} className={`${styles["productInfo"]}`}>
           <h3 className="">
             <span style={{ color: "#1b82e3" }}>Product Name: </span>
             {pData?.productName}
