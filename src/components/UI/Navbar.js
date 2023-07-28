@@ -174,7 +174,7 @@ const Navbar = () => {
           </Link>
 
           {session?.user ? (
-            <div style={{cursor: "pointer"}} onClick={()=> signOut()}>
+            <div style={{ cursor: "pointer" }} onClick={() => signOut()}>
               <p
                 style={{ color: "white", fontWeight: 600, margin: "0px 10px" }}
               >

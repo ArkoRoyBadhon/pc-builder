@@ -1,24 +1,14 @@
-/* eslint-disable react/jsx-key */
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable @next/next/no-typos */
 import RootLayout from "@/components/Layouts/RootLayout";
+import { Card, Col, Rate, Row } from "antd";
 import Image from "next/image";
-import { Card } from "antd";
-const { Meta } = Card;
-import { Col, Row } from "antd";
-import { Rate } from "antd";
+import { useRouter } from "next/router";
 
-const desc = ["terrible", "bad", "normal", "good", "wonderful"];
-
-const HomePage = ({ products }) => {
+const SubCategory = ({ products }) => {
+  const router = useRouter();
+    console.log(products);
   return (
-    <div className="pageHeight">
-      <div className="content-body">
-        <h3 className="" style={{ paddingTop: "20px" }}>
-          Our products
-        </h3>
-
-        <Row gutter={[16, 16]}>
+    <div className="pageHeight content-body">
+      <Row gutter={[16, 16]}>
           {products.map((product) => {
             return (
               <Col key={product._id} xs={24} sm={12} md={8} lg={6}>
@@ -65,20 +55,42 @@ const HomePage = ({ products }) => {
             );
           })}
         </Row>
-      </div>
     </div>
   );
 };
 
-export default HomePage;
+export default SubCategory;
 
-HomePage.getLayout = function getLayout(page) {
+SubCategory.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };
 
-export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:5000/randomproducts");
+export const getStaticPaths = async () => {
+  const res = await fetch(`http://localhost:5000/allproducts`);
   const data = await res.json();
+
+  //   console.log(data?.data);
+  const paths = data?.map((item) => ({
+    params: { subcat: item.category },
+  }));
+
+  return { paths, fallback: "blocking" };
+};
+
+export const getStaticProps = async (context) => {
+  const { params } = context;
+  console.log("params", params);
+  const res = await fetch(
+    `http://localhost:5000/allproducts?category=${params.subcat}`
+  );
+  const data = await res.json();
+
+  if (!data) {
+    return {
+      notFound: true, // Return a 404 page for paths not found
+    };
+  }
+
   return {
     props: {
       products: data,
