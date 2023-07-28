@@ -14,14 +14,14 @@ import styles from "../../styles/UI/Navbar.module.css";
 import { useState } from "react";
 
 function getItem(label, key, icon, children, type, to) {
-    return {
-      key,
-      icon,
-      children,
-      label: type === 'link' ? <Link href={to}>{label}</Link> : label, 
-      type,
-    };
-  }
+  return {
+    key,
+    icon,
+    children,
+    label: type === "link" ? <Link href={to}>{label}</Link> : label,
+    type,
+  };
+}
 
 const items = [
   {
@@ -93,16 +93,36 @@ const items = [
 const mobileItems = [
   getItem("Pc Builder", "xx", null, null, "link", "/pc-builder"),
   getItem("Categories", "sub1", <MailOutlined />, [
-    getItem("CPU / Processor", "1", <MailOutlined />, null, "link", "/categories/cpu" ),
+    getItem(
+      "CPU / Processor",
+      "1",
+      <MailOutlined />,
+      null,
+      "link",
+      "/categories/cpu"
+    ),
     getItem("Motherboard", "2", null, null, "link", "/categories/motherboard"),
     getItem("RAM", "3", null, null, "link", "/categories/ram"),
-    getItem("Power Supply Unit", "4", null, null, "link", "/categories/power-supply-unit"),
-    getItem("Storage Device", "5", null, null, "link", "/categories/storage-device"),
+    getItem(
+      "Power Supply Unit",
+      "4",
+      null,
+      null,
+      "link",
+      "/categories/power-supply-unit"
+    ),
+    getItem(
+      "Storage Device",
+      "5",
+      null,
+      null,
+      "link",
+      "/categories/storage-device"
+    ),
     getItem("Monitor", "6", null, null, "link", "/categories/monitor"),
     getItem("Others", "7", null, null, "link", "/categories/others"),
   ]),
 ];
-
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -144,8 +164,14 @@ const Navbar = () => {
               Categories
             </Space>
           </Dropdown>
-          <Link href="/">
-            <p style={{ color: "white", fontWeight: 600 }}>PC Builder</p>
+          <Link href="/pc-builder">
+            <p style={{ color: "white", fontWeight: 600, margin: "0px 10px", }}>PC Builder</p>
+          </Link>
+          <Link href="/signin">
+            <p style={{ color: "white", fontWeight: 600, margin: "0px 10px", }}>Login</p>
+          </Link>
+          <Link href="/pc-builder">
+            <p style={{ color: "white", fontWeight: 600, margin: "0px 10px", }}>Log Out</p>
           </Link>
         </div>
 
