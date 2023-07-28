@@ -1,5 +1,5 @@
 import RootLayout from "@/components/Layouts/RootLayout";
-import { GithubFilled } from "@ant-design/icons";
+import { GithubFilled, GoogleOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import { signIn } from "next-auth/react";
 import React from "react";
@@ -11,6 +11,7 @@ const LoginPage = () => {
         style={{
           display: "flex",
           justifyContent: "center",
+          flexDirection: "column",
           alignItems: "center",
           paddingTop: "200px",
         }}
@@ -23,6 +24,15 @@ const LoginPage = () => {
             callbackUrl: "/"
         })}
         > <GithubFilled />  Login With Github</Button>
+        <Button style={{
+            paddingLeft: "20px",
+            paddingRight: "20px",
+            marginTop: "10px"
+        }}
+        onClick={()=> signIn("google", {
+            callbackUrl: "/"
+        })}
+        > <GoogleOutlined />  Login With Google</Button>
       </div>
     </div>
   );
