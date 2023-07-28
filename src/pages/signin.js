@@ -19,7 +19,9 @@ const LoginPage = () => {
             paddingLeft: "20px",
             paddingRight: "20px",
         }}
-        onClick={()=> signIn()}
+        onClick={()=> signIn("github", {
+            callbackUrl: "/"
+        })}
         > <GithubFilled />  Login With Github</Button>
       </div>
     </div>

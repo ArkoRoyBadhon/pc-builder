@@ -12,6 +12,7 @@ import { Dropdown, Space } from "antd";
 import Link from "next/link";
 import styles from "../../styles/UI/Navbar.module.css";
 import { useState } from "react";
+import { signOut, useSession } from "next-auth/react";
 
 function getItem(label, key, icon, children, type, to) {
   return {
@@ -125,6 +126,8 @@ const mobileItems = [
 ];
 
 const Navbar = () => {
+  const { data: session } = useSession();
+
   const [open, setOpen] = useState(false);
   const showDrawer = () => {
     setOpen(true);
@@ -165,14 +168,28 @@ const Navbar = () => {
             </Space>
           </Dropdown>
           <Link href="/pc-builder">
-            <p style={{ color: "white", fontWeight: 600, margin: "0px 10px", }}>PC Builder</p>
+            <p style={{ color: "white", fontWeight: 600, margin: "0px 10px" }}>
+              PC Builder
+            </p>
           </Link>
-          <Link href="/signin">
-            <p style={{ color: "white", fontWeight: 600, margin: "0px 10px", }}>Login</p>
-          </Link>
-          <Link href="/pc-builder">
-            <p style={{ color: "white", fontWeight: 600, margin: "0px 10px", }}>Log Out</p>
-          </Link>
+
+          {session?.user ? (
+            <div style={{cursor: "pointer"}} onClick={()=> signOut()}>
+              <p
+                style={{ color: "white", fontWeight: 600, margin: "0px 10px" }}
+              >
+                Log Out
+              </p>
+            </div>
+          ) : (
+            <Link href="/signin">
+              <p
+                style={{ color: "white", fontWeight: 600, margin: "0px 10px" }}
+              >
+                Login
+              </p>
+            </Link>
+          )}
         </div>
 
         {/* ============== Mobile Menu =============  */}
