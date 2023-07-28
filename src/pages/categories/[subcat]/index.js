@@ -13,7 +13,7 @@ const SubCategory = ({ products }) => {
             return (
               <Col key={product._id} xs={24} sm={12} md={8} lg={6}>
                 <Card
-                onClick={()=> router.push(`/categories/${router.query.subcat}/${product?._id}`)}
+                onClick={()=> router.push(`/categories/${router.query.subcat}/${product._id}`)}
                   hoverable
                   cover={
                     <Image
@@ -29,7 +29,7 @@ const SubCategory = ({ products }) => {
                 >
                   <div className="">
                     <h4 className="" style={{ color: "black" }}>
-                      {product?.name.slice(0, 50)}...
+                      {product?.productName && product?.productName.slice(0, 50)}...
                     </h4>
                     <div className="">
                       <span style={{ fontWeight: 600 }}>Category: </span>
@@ -46,9 +46,9 @@ const SubCategory = ({ products }) => {
                     </div>
                     <div className="">
                       <span style={{ marginRight: "10px" }}>
-                        <Rate allowHalf value={product?.rating} />
+                        <Rate allowHalf value={product?.averageRating} />
                       </span>
-                      {product?.rating}
+                      {product?.averageRating}
                     </div>
                   </div>
                 </Card>
@@ -74,7 +74,6 @@ export const getStaticPaths = async () => {
   const paths = data?.map((item) => ({
     params: { subcat: item.category },
   }));
-
   return { paths, fallback: "blocking" };
 };
 

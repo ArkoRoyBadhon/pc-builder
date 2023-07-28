@@ -4,11 +4,15 @@
 }
 
 .pageHeight {
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .content-body {
   margin: 0 60px;
+}
+
+.ant-divider-horizontal {
+  border-top-color: rgba(0, 0, 0, 0.6); 
 }
 
 @media screen and (max-width: 480px) {

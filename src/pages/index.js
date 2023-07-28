@@ -38,7 +38,7 @@ const HomePage = ({ products }) => {
                 >
                   <div className="">
                     <h4 className="" style={{ color: "black" }}>
-                      {product?.name.slice(0, 50)}...
+                      {product?.productName && product?.productName.slice(0, 50)}...
                     </h4>
                     <div className="">
                       <span style={{ fontWeight: 600 }}>Category: </span>
@@ -55,9 +55,9 @@ const HomePage = ({ products }) => {
                     </div>
                     <div className="">
                       <span style={{ marginRight: "10px" }}>
-                        <Rate allowHalf value={product?.rating} />
+                        <Rate allowHalf value={product?.averageRating} />
                       </span>
-                      {product?.rating}
+                      {product?.averageRating}
                     </div>
                   </div>
                 </Card>
