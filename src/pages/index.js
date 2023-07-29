@@ -18,7 +18,10 @@ const HomePage = ({ products }) => {
     <div className="pageHeight">
       <BannerSection />
       <div className="content-body">
-        <h3 className="" style={{ paddingTop: "60px" }}>
+        <h3
+          className=""
+          style={{ paddingTop: "60px", fontSize: 22, paddingBottom: "40px" }}
+        >
           Our products
         </h3>
 
@@ -32,7 +35,11 @@ const HomePage = ({ products }) => {
             return (
               <Col key={product._id} xs={24} sm={12} md={8} lg={6}>
                 <Card
-                onClick={()=> router.push(`/categories/${product?.category}/${product._id}`)}
+                  onClick={() =>
+                    router.push(
+                      `/categories/${product?.category}/${product._id}`
+                    )
+                  }
                   hoverable
                   cover={
                     <Image
@@ -89,7 +96,9 @@ HomePage.getLayout = function getLayout(page) {
 };
 
 export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:5000/randomproducts");
+  const res = await fetch(
+    "https://pc-builder-server-ashy.vercel.app/randomproducts"
+  );
   const data = await res.json();
   return {
     props: {

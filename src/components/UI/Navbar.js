@@ -82,14 +82,14 @@ const items = [
       </Link>
     ),
   },
-  {
-    key: "7",
-    label: (
-      <Link rel="noopener noreferrer" href="/categories/others">
-        Others
-      </Link>
-    ),
-  },
+  // {
+  //   key: "7",
+  //   label: (
+  //     <Link rel="noopener noreferrer" href="/categories/others">
+  //       Others
+  //     </Link>
+  //   ),
+  // },
 ];
 
 export const mobileItems = [
@@ -122,7 +122,7 @@ export const mobileItems = [
       "/categories/storage-device"
     ),
     getItem("Monitor", "6", null, null, "link", "/categories/monitor"),
-    getItem("Others", "7", null, null, "link", "/categories/others"),
+    // getItem("Others", "7", null, null, "link", "/categories/others"),
   ]),
 ];
 
@@ -139,7 +139,7 @@ const Navbar = () => {
   };
 
   const onClick = (e) => {
-    console.log("click ", e);
+    // console.log("click ", e);
   };
 
   return (

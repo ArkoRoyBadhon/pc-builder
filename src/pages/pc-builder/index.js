@@ -215,7 +215,7 @@ const PCBuilder = () => {
                   fontWeight: 600,
                 }}
               >
-                Create PC
+                Complete Build
               </Button>
               <Modal
                 title="Success"
@@ -230,23 +230,24 @@ const PCBuilder = () => {
             <>
               <Button
                 type="primary"
-                onClick={showModal}
+                // onClick={showModal}
+                disabled
                 style={{
                   marginTop: "30px",
                   marginBottom: "30px",
                   fontWeight: 600,
                 }}
               >
-                Create PC
+                Complete Build
               </Button>
-              <Modal
+              {/* <Modal
                 title="Warning"
                 open={isModalOpen}
                 onOk={handleOk}
                 onCancel={handleCancel}
               >
                 <p>Please Select at least 6 products</p>
-              </Modal>
+              </Modal> */}
             </>
           )}
         </div>

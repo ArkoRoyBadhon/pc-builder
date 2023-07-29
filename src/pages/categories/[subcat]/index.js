@@ -8,61 +8,74 @@ const SubCategory = ({ products }) => {
   // console.log(router.query.subcat);
   return (
     <div className="pageHeight content-body">
-        <h2 style={{
+      <h2
+        style={{
           paddingTop: "20px",
-          textTransform: "capitalize"
-        }}>{router?.query?.subcat}</h2>
+          textTransform: "capitalize",
+          paddingBottom: "20px",
+        }}
+      >
+        {router?.query?.subcat}
+      </h2>
 
-      <Row gutter={[16, 16]} style={{
-            paddingBottom: 40,
-          }}>
-          {products.map((product) => {
-            return (
-              <Col key={product._id} xs={24} sm={12} md={8} lg={6}>
-                <Card
-                onClick={()=> router.push(`/categories/${router.query.subcat}/${product._id}`)}
-                  hoverable
-                  cover={
-                    <Image
-                      style={{
-                        height: 250,
-                      }}
-                      src={product?.image}
-                      width={500}
-                      height={500}
-                      alt="cardImg"
-                    />
-                  }
-                >
+      <Row
+        gutter={[16, 16]}
+        style={{
+          paddingBottom: 40,
+        }}
+      >
+        {products.map((product) => {
+          return (
+            <Col key={product._id} xs={24} sm={12} md={8} lg={6}>
+              <Card
+                onClick={() =>
+                  router.push(
+                    `/categories/${router.query.subcat}/${product._id}`
+                  )
+                }
+                hoverable
+                cover={
+                  <Image
+                    style={{
+                      height: 250,
+                    }}
+                    src={product?.image}
+                    width={500}
+                    height={500}
+                    alt="cardImg"
+                  />
+                }
+              >
+                <div className="">
+                  <h4 className="" style={{ color: "black" }}>
+                    {product?.productName && product?.productName.slice(0, 50)}
+                    ...
+                  </h4>
                   <div className="">
-                    <h4 className="" style={{ color: "black" }}>
-                      {product?.productName && product?.productName.slice(0, 50)}...
-                    </h4>
-                    <div className="">
-                      <span style={{ fontWeight: 600 }}>Category: </span>
-                      {product?.category}
-                    </div>
-                    <div className="">
-                      {" "}
-                      <span style={{ fontWeight: 600 }}>Price: </span>
-                      {product?.price} BDT
-                    </div>
-                    <div className="">
-                      <span style={{ fontWeight: 600 }}>Availability: </span>
-                      {product?.status}
-                    </div>
-                    <div className="">
-                      <span style={{ marginRight: "10px" }}>
-                        <Rate allowHalf value={product?.averageRating} />
-                      </span>
-                      {product?.averageRating}
-                    </div>
+                    <span style={{ fontWeight: 600 }}>Category: </span>
+                    {product?.category}
                   </div>
-                </Card>
-              </Col>
-            );
-          })}
-        </Row>
+                  <div className="">
+                    {" "}
+                    <span style={{ fontWeight: 600 }}>Price: </span>
+                    {product?.price} BDT
+                  </div>
+                  <div className="">
+                    <span style={{ fontWeight: 600 }}>Availability: </span>
+                    {product?.status}
+                  </div>
+                  <div className="">
+                    <span style={{ marginRight: "10px" }}>
+                      <Rate allowHalf value={product?.averageRating} />
+                    </span>
+                    {product?.averageRating}
+                  </div>
+                </div>
+              </Card>
+            </Col>
+          );
+        })}
+      </Row>
     </div>
   );
 };
@@ -74,7 +87,9 @@ SubCategory.getLayout = function getLayout(page) {
 };
 
 export const getStaticPaths = async () => {
-  const res = await fetch(`http://localhost:5000/allproducts`);
+  const res = await fetch(
+    `https://pc-builder-server-ashy.vercel.app/allproducts`
+  );
   const data = await res.json();
 
   //   console.log(data?.data);
@@ -86,9 +101,9 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   const { params } = context;
-  console.log("params", params);
+  // console.log("params", params);
   const res = await fetch(
-    `http://localhost:5000/allproducts?category=${params.subcat}`
+    `https://pc-builder-server-ashy.vercel.app/allproducts?category=${params.subcat}`
   );
   const data = await res.json();
 

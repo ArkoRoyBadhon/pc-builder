@@ -118,7 +118,7 @@ SubCategory.getLayout = function getLayout(page) {
 };
 
 // export const getStaticPaths = async () => {
-//   const res = await fetch(`http://localhost:5000/allproducts`);
+//   const res = await fetch(`https://pc-builder-server-ashy.vercel.app/allproducts`);
 //   const data = await res.json();
 
 //   //   console.log(data?.data);
@@ -131,9 +131,9 @@ SubCategory.getLayout = function getLayout(page) {
 
 export const getServerSideProps = async (context) => {
   const { params } = context;
-  console.log("params", params);
+  // console.log("params", params);
   const res = await fetch(
-    `http://localhost:5000/allproducts?category=${params.subcat}`
+    `https://pc-builder-server-ashy.vercel.app/allproducts?category=${params.subcat}`
   );
   const data = await res.json();
 
