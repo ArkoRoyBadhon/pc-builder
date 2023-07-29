@@ -2,10 +2,8 @@ import React from "react";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
 import Link from "next/link";
 import Navbar from "../UI/Navbar";
+import FooterCom from "../UI/FooterCom";
 const { Content, Footer } = Layout;
-
-
-
 
 const RootLayout = ({ children }) => {
   const {
@@ -14,17 +12,7 @@ const RootLayout = ({ children }) => {
   return (
     <Layout className="layout">
       <Navbar />
-      <Content
-      >
-        {/* <Breadcrumb
-          style={{
-            margin: "16px 0",
-          }}
-        >
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb> */}
+      <Content>
         <div
           className="site-layout-content"
           style={{
@@ -34,13 +22,7 @@ const RootLayout = ({ children }) => {
           {children}
         </div>
       </Content>
-      <Footer
-        style={{
-          textAlign: "center",
-        }}
-      >
-        Ant Design ©2023 Created by Ant UED
-      </Footer>
+      <FooterCom />
     </Layout>
   );
 };
