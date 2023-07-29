@@ -1,13 +1,22 @@
 /* eslint-disable jsx-a11y/alt-text */
 import RootLayout from "@/components/Layouts/RootLayout";
 import { ArrowRightOutlined } from "@ant-design/icons";
-import { Card, Col, Divider, Rate, Row } from "antd";
+import { Button, Card, Col, Divider, Rate, Row } from "antd";
 import { Image } from "antd";
 import { useRouter } from "next/router";
 import styles from "../../../styles/productDetail.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { addtoPCBuilder } from "@/redux/features/pcBuilder/pcBuilderSlice";
+
+function isCategoryIncluded(products, categoryToCheck) {
+  return products.find((product) => product.category === categoryToCheck);
+}
 
 const ProductDetail = ({ productDetail: pData }) => {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const { products } = useSelector((state) => state.pcbuilder);
+
   return (
     <div className="pageHeight content-body">
       <div style={{ paddingTop: 20 }} className={`${styles["productHeader"]}`}>
@@ -36,6 +45,17 @@ const ProductDetail = ({ productDetail: pData }) => {
             <strong style={{ color: "#1b82e3" }}>Price: </strong> {pData?.price}{" "}
             BDT
           </p>
+          <Button
+            type="primary"
+            style={{ marginTop: 10 }}
+            onClick={() => {
+              !isCategoryIncluded(products, pData.category) &&
+                dispatch(addtoPCBuilder(pData));
+              router.push("/pc-builder");
+            }}
+          >
+            Add to PC Builder
+          </Button>
         </div>
       </div>
       <Divider style={{}} />
@@ -93,17 +113,17 @@ ProductDetail.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };
 
-export const getStaticPaths = async () => {
-  const res = await fetch(`http://localhost:5000/allproducts`);
-  const data = await res.json();
+// export const getStaticPaths = async () => {
+//   const res = await fetch(`http://localhost:5000/allproducts`);
+//   const data = await res.json();
 
-  const paths = data?.map((item) => ({
-    params: { subcat: item.category, productid: String(item._id) },
-  }));
-  return { paths, fallback: "blocking" };
-};
+//   const paths = data?.map((item) => ({
+//     params: { subcat: item.category, productid: String(item._id) },
+//   }));
+//   return { paths, fallback: "blocking" };
+// };
 
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
   const { params } = context;
   const res = await fetch(`http://localhost:5000/product/${params.productid}`);
   const data = await res.json();
@@ -112,6 +132,6 @@ export const getStaticProps = async (context) => {
     props: {
       productDetail: data,
     },
-    revalidate: 10,
+    // revalidate: 10,
   };
 };

@@ -3,11 +3,16 @@ import { addtoPCBuilder } from "@/redux/features/pcBuilder/pcBuilderSlice";
 import { Button, Card, Col, Rate, Row } from "antd";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+function isCategoryIncluded(products, categoryToCheck) {
+  return products.find((product) => product.category === categoryToCheck);
+}
 
 const SubCategory = ({ products }) => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const { products: AllProduct } = useSelector((state) => state.pcbuilder);
 
   return (
     <div className="pageHeight content-body">
@@ -30,11 +35,6 @@ const SubCategory = ({ products }) => {
           return (
             <Col key={product._id} xs={24} sm={12} md={8} lg={6}>
               <Card
-                // onClick={() =>
-                //   router.push(
-                //     `/categories/${router.query.subcat}/${product._id}`
-                //   )
-                // }
                 hoverable
                 cover={
                   <Image
@@ -73,16 +73,35 @@ const SubCategory = ({ products }) => {
                     {product?.averageRating}
                   </div>
                 </div>
-                <Button
-                  type="primary"
-                  style={{ marginTop: 10 }}
-                  onClick={() => {
-                    dispatch(addtoPCBuilder(product));
-                    router.push("/pc-builder");
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
                   }}
                 >
-                  Add to PC Builder
-                </Button>
+                  <Button
+                    type="primary"
+                    style={{ marginTop: 10 }}
+                    onClick={() =>
+                      router.push(
+                        `/pc-builder/${router.query.subcat}/${product._id}`
+                      )
+                    }
+                  >
+                    Details
+                  </Button>
+                  <Button
+                    type="primary"
+                    style={{ marginTop: 10 }}
+                    onClick={() => {
+                      !isCategoryIncluded(AllProduct, product?.category) &&
+                        dispatch(addtoPCBuilder(product));
+                      router.push("/pc-builder");
+                    }}
+                  >
+                    Add to PC Builder
+                  </Button>
+                </div>
               </Card>
             </Col>
           );
@@ -98,18 +117,19 @@ SubCategory.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };
 
-export const getStaticPaths = async () => {
-  const res = await fetch(`http://localhost:5000/allproducts`);
-  const data = await res.json();
+// export const getStaticPaths = async () => {
+//   const res = await fetch(`http://localhost:5000/allproducts`);
+//   const data = await res.json();
 
-  //   console.log(data?.data);
-  const paths = data?.map((item) => ({
-    params: { subcat: item.category },
-  }));
-  return { paths, fallback: "blocking" };
-};
+//   //   console.log(data?.data);
+//   const paths = data?.map((item) => ({
+//     params: { subcat: item.category },
+//   }));
+//   return { paths, fallback: false };
+//   // return { paths, fallback: "blocking" };
+// };
 
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
   const { params } = context;
   console.log("params", params);
   const res = await fetch(
@@ -127,6 +147,6 @@ export const getStaticProps = async (context) => {
     props: {
       products: data,
     },
-    revalidate: 10,
+    // revalidate: 10,
   };
 };
