@@ -1,8 +1,9 @@
 import RootLayout from "@/components/Layouts/RootLayout";
-import { Divider, Menu } from "antd";
+import { Button, Divider, Menu, Modal } from "antd";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import styles from "../../styles/pc-builder.module.css";
+import { useState } from "react";
 
 function isCategoryIncluded(products, categoryToCheck) {
   return products.find((product) => product.category === categoryToCheck);
@@ -10,9 +11,18 @@ function isCategoryIncluded(products, categoryToCheck) {
 
 const PCBuilder = () => {
   const { pcbuilder: pcdata } = useSelector((state) => state);
-
-  console.log("pcdata", pcdata);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const products = pcdata.products || [];
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="pageHeight content-body">
       <div
@@ -21,7 +31,10 @@ const PCBuilder = () => {
         }}
       >
         <div className={`${styles["pcBuilderNav"]}`}>
-          <Link href="/pc-builder/cpu" className={isCategoryIncluded(products, "CPU") ? 'disabled' : ''}>
+          <Link
+            href="/pc-builder/cpu"
+            className={isCategoryIncluded(products, "CPU") ? "disabled" : ""}
+          >
             CPU/Processor{" "}
             {isCategoryIncluded(products, "CPU") && (
               <span
@@ -36,7 +49,12 @@ const PCBuilder = () => {
               </span>
             )}{" "}
           </Link>
-          <Link className={isCategoryIncluded(products, "CPU") ? 'disabled' : ''} href="/pc-builder/motherboard" >
+          <Link
+            className={
+              isCategoryIncluded(products, "MOTHERBOARD") ? "disabled" : ""
+            }
+            href="/pc-builder/motherboard"
+          >
             MOTHERBOARD{" "}
             {isCategoryIncluded(products, "MOTHERBOARD") && (
               <span
@@ -51,7 +69,10 @@ const PCBuilder = () => {
               </span>
             )}
           </Link>
-          <Link className={isCategoryIncluded(products, "RAM") ? 'disabled' : ''} href="/pc-builder/ram">
+          <Link
+            className={isCategoryIncluded(products, "RAM") ? "disabled" : ""}
+            href="/pc-builder/ram"
+          >
             RAM{" "}
             {isCategoryIncluded(products, "RAM") && (
               <span
@@ -66,7 +87,12 @@ const PCBuilder = () => {
               </span>
             )}
           </Link>
-          <Link className={isCategoryIncluded(products, "POWER SUPPLY") ? 'disabled' : ''} href="/pc-builder/power-supply">
+          <Link
+            className={
+              isCategoryIncluded(products, "POWER SUPPLY") ? "disabled" : ""
+            }
+            href="/pc-builder/power-supply"
+          >
             POWER SUPPLY UNIT{" "}
             {isCategoryIncluded(products, "POWER SUPPLY") && (
               <span
@@ -81,7 +107,12 @@ const PCBuilder = () => {
               </span>
             )}
           </Link>
-          <Link className={isCategoryIncluded(products, "STORAGE DEVICE") ? 'disabled' : ''} href="/pc-builder/storage-device">
+          <Link
+            className={
+              isCategoryIncluded(products, "STORAGE DEVICE") ? "disabled" : ""
+            }
+            href="/pc-builder/storage-device"
+          >
             STORAGE DEVICE{" "}
             {isCategoryIncluded(products, "STORAGE DEVICE") && (
               <span
@@ -96,7 +127,12 @@ const PCBuilder = () => {
               </span>
             )}
           </Link>
-          <Link className={isCategoryIncluded(products, "MONITOR") ? 'disabled' : ''} href="/pc-builder/MONITOR">
+          <Link
+            className={
+              isCategoryIncluded(products, "MONITOR") ? "disabled" : ""
+            }
+            href="/pc-builder/MONITOR"
+          >
             MONITOR{" "}
             {isCategoryIncluded(products, "MONITOR") && (
               <span
@@ -113,9 +149,91 @@ const PCBuilder = () => {
           </Link>
         </div>
         <div style={{ marginLeft: "50px", marginTop: "40px", width: "600px" }}>
-          <h4 className="">Your PC Parts</h4>
-
+          <h4 style={{ marginBottom: 10 }}>Your PC Parts</h4>
+          {products?.map((product, i) => {
+            return (
+              <div
+                key={product._id}
+                style={{
+                  padding: "10px 0",
+                  display: "flex",
+                  width: "50vw",
+                }}
+              >
+                <div style={{ marginRight: 10 }}>{i + 1}.</div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    flexDirection: "column",
+                  }}
+                >
+                  <div>
+                    <b style={{ paddingRight: 5 }}>{product?.productName} </b>{" "}
+                    {">"}
+                    <b>({product?.price} BDT)</b>
+                  </div>
+                  <div>
+                    <b>Category:</b> {product?.category}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
           <Divider />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <b>Total Price</b>
+            <b>{pcdata?.total} BDT</b>
+          </div>
+
+          {pcdata.count === 6 ? (
+            <>
+              <Button
+                type="primary"
+                onClick={showModal}
+                style={{
+                  marginTop: "30px",
+                  fontWeight: 600,
+                }}
+              >
+                Create PC
+              </Button>
+              <Modal
+                title="Warning"
+                open={isModalOpen}
+                onOk={handleOk}
+                onCancel={handleCancel}
+              >
+                <p>PC Created Successfully</p>
+              </Modal>
+            </>
+          ) : (
+            <>
+              <Button
+                type="primary"
+                onClick={showModal}
+                style={{
+                  marginTop: "30px",
+                  fontWeight: 600,
+                }}
+              >
+                Create PC
+              </Button>
+              <Modal
+                title="Warning"
+                open={isModalOpen}
+                onOk={handleOk}
+                onCancel={handleCancel}
+              >
+                <p>Please Select at least 6 products</p>
+              </Modal>
+            </>
+          )}
         </div>
       </div>
     </div>
