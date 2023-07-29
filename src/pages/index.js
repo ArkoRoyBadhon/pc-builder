@@ -7,10 +7,12 @@ import { Card } from "antd";
 const { Meta } = Card;
 import { Col, Row } from "antd";
 import { Rate } from "antd";
+import { useRouter } from "next/router";
 
 const desc = ["terrible", "bad", "normal", "good", "wonderful"];
 
 const HomePage = ({ products }) => {
+  const router = useRouter();
   return (
     <div className="pageHeight">
       <div className="content-body">
@@ -18,11 +20,17 @@ const HomePage = ({ products }) => {
           Our products
         </h3>
 
-        <Row gutter={[16, 16]}>
+        <Row
+          gutter={[16, 16]}
+          style={{
+            paddingBottom: 40,
+          }}
+        >
           {products.map((product) => {
             return (
               <Col key={product._id} xs={24} sm={12} md={8} lg={6}>
                 <Card
+                onClick={()=> router.push(`/categories/${product?.category}/${product._id}`)}
                   hoverable
                   cover={
                     <Image
@@ -38,7 +46,9 @@ const HomePage = ({ products }) => {
                 >
                   <div className="">
                     <h4 className="" style={{ color: "black" }}>
-                      {product?.productName && product?.productName.slice(0, 50)}...
+                      {product?.productName &&
+                        product?.productName.slice(0, 50)}
+                      ...
                     </h4>
                     <div className="">
                       <span style={{ fontWeight: 600 }}>Category: </span>

@@ -61,7 +61,7 @@ const items = [
   {
     key: "4",
     label: (
-      <Link rel="noopener noreferrer" href="/categories/power-supply-unit">
+      <Link rel="noopener noreferrer" href="/categories/power-supply">
         Power Supply Unit
       </Link>
     ),
@@ -92,7 +92,7 @@ const items = [
   },
 ];
 
-const mobileItems = [
+export const mobileItems = [
   getItem("Pc Builder", "xx", null, null, "link", "/pc-builder"),
   getItem("Categories", "sub1", <MailOutlined />, [
     getItem(
@@ -111,7 +111,7 @@ const mobileItems = [
       null,
       null,
       "link",
-      "/categories/power-supply-unit"
+      "/categories/power-supply"
     ),
     getItem(
       "Storage Device",
