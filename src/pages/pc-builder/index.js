@@ -200,7 +200,7 @@ const PCBuilder = () => {
               justifyContent: "space-between",
             }}
           >
-            <b>Total Price</b>
+            <b style={{marginRight: 20}}>Total Price</b>
             <b>{pcdata?.total} BDT</b>
           </div>
 

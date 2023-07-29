@@ -1,4 +1,4 @@
-import { Breadcrumb, Button, Drawer, Layout, Menu } from "antd";
+import { Breadcrumb, Button, Drawer, Layout, Menu, Tooltip } from "antd";
 const { Header } = Layout;
 import {
   AppstoreOutlined,
@@ -145,7 +145,7 @@ const Navbar = () => {
   return (
     <>
       <Header className={`${styles["header-style"]}`}>
-        <div style={{cursor: "pointer"}} onClick={() => router.push("/")}>
+        <div style={{ cursor: "pointer" }} onClick={() => router.push("/")}>
           <span style={{ color: "white", fontWeight: 800 }}>PC</span>
           <span style={{ color: "red", fontWeight: 800 }}>Builder</span>
         </div>
@@ -180,7 +180,9 @@ const Navbar = () => {
               <p
                 style={{ color: "white", fontWeight: 600, margin: "0px 10px" }}
               >
-                Log Out
+                <Tooltip placement="bottom" title={session?.user?.name}>
+                  <Button>Log Out</Button>
+                </Tooltip>
               </p>
             </div>
           ) : (
@@ -215,6 +217,33 @@ const Navbar = () => {
               mode="inline"
               items={mobileItems}
             />
+            {session?.user ? (
+              <div style={{ cursor: "pointer" }} onClick={() => signOut()}>
+                <p
+                  style={{
+                    color: "white",
+                    fontWeight: 600,
+                    margin: "0px 20px",
+                  }}
+                >
+                  <Tooltip title={session?.user?.name}>
+                    <Button>Log Out</Button>
+                  </Tooltip>
+                </p>
+              </div>
+            ) : (
+              <Link href="/signin">
+                <Button
+                  style={{
+                    color: "black",
+                    fontWeight: 600,
+                    margin: "10px 20px",
+                  }}
+                >
+                  Login
+                </Button>
+              </Link>
+            )}
           </Drawer>
         </div>
       </Header>

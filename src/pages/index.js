@@ -8,6 +8,7 @@ const { Meta } = Card;
 import { Col, Row } from "antd";
 import { Rate } from "antd";
 import { useRouter } from "next/router";
+import BannerSection from "@/components/UI/Banner";
 
 const desc = ["terrible", "bad", "normal", "good", "wonderful"];
 
@@ -15,8 +16,9 @@ const HomePage = ({ products }) => {
   const router = useRouter();
   return (
     <div className="pageHeight">
+      <BannerSection />
       <div className="content-body">
-        <h3 className="" style={{ paddingTop: "20px" }}>
+        <h3 className="" style={{ paddingTop: "60px" }}>
           Our products
         </h3>
 
