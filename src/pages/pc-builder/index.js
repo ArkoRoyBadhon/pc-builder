@@ -1,6 +1,8 @@
 import RootLayout from "@/components/Layouts/RootLayout";
 import { Divider, Menu } from "antd";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import styles from '../../styles/pc-builder.module.css'
 
 function getItem(label, key, icon, children, type, to) {
   return {
@@ -14,14 +16,7 @@ function getItem(label, key, icon, children, type, to) {
 
 const categoryItems = [
   getItem("Categories", "sub1", null, [
-    getItem(
-      "CPU / Processor",
-      "1",
-      null,
-      null,
-      "link",
-      "/pc-builder/cpu"
-    ),
+    getItem("CPU / Processor", "1", null, null, "link", "/pc-builder/cpu"),
     getItem("Motherboard", "2", null, null, "link", "/pc-builder/motherboard"),
     getItem("RAM", "3", null, null, "link", "/pc-builder/ram"),
     getItem(
@@ -45,19 +40,18 @@ const categoryItems = [
 ];
 
 const PCBuilder = () => {
-  const onClick = (e) => {
-    console.log("click ", e);
-  };
+  const { pcbuilder: pcdata } = useSelector((state) => state);
+  console.log("pcdata",pcdata);
   return (
     <div className="pageHeight content-body">
-      <div style={{
-        display: "flex",
-        // justifyContent: "space-between"
-      }}
+      <div
+        style={{
+          display: "flex",
+          // justifyContent: "space-between"
+        }}
       >
-        <div className="">
-          <Menu
-            onClick={onClick}
+        <div className={`${styles["pcBuilderNav"]}`}>
+          {/* <Menu
             style={{
               width: 256,
             }}
@@ -65,13 +59,18 @@ const PCBuilder = () => {
             defaultOpenKeys={["sub1"]}
             mode="inline"
             items={categoryItems}
-          />
+          /> */}
+          <Link href="/pc-builder/cpu">CPU/Processor</Link>
+          <Link href="/pc-builder/motherboard">MOTHERBOARD</Link>
+          <Link href="/pc-builder/ram">RAM</Link>
+          <Link href="/pc-builder/power-supply">POWER SUPPLY UNIT</Link>
+          <Link href="/pc-builder/storage-device">STORAGE DEVICE</Link>
+          <Link href="/pc-builder/MONITOR">MONITOR</Link>
         </div>
-        <div style={{marginLeft: "50px", marginTop: "40px", width: "600px"}}>
-            <h4 className="">Your PC Parts</h4>
+        <div style={{ marginLeft: "50px", marginTop: "40px", width: "600px" }}>
+          <h4 className="">Your PC Parts</h4>
 
-            <Divider />
-            
+          <Divider />
         </div>
       </div>
     </div>

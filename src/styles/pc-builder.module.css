@@ -1,0 +1,19 @@
+.pcBuilderNav {
+    display: flex;
+    flex-direction: column;
+    background: rgb(190, 196, 236);
+    min-height: 100vh;
+    border-radius: 5px;
+    padding: 20px 20px;
+}
+
+.pcBuilderNav a {
+    font-size: larger;
+    padding: 10px 20px;
+    font-weight: 600;
+}
+
+.pcBuilderNav a:hover {
+    background: #7e9be0;
+    color: beige;
+}
