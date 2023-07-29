@@ -12,12 +12,19 @@ export const pcBuilderSlice = createSlice({
   reducers: {
     addtoPCBuilder: (state, action) => {
       state.products.push({ ...action.payload });
-      state.total += action.payload.price
+      state.total += action.payload.price;
       state.count += 1;
+    },
+    removeFromPCBuilder: (state, action) => {
+      state.products = state.products.filter(
+        (product) => product?._id !== action.payload._id
+      );
+      state.total -= action.payload.price;
+      state.count -= 1;
     },
   },
 });
 
-export const { addtoPCBuilder } = pcBuilderSlice.actions;
+export const { addtoPCBuilder,removeFromPCBuilder } = pcBuilderSlice.actions;
 
 export default pcBuilderSlice.reducer;

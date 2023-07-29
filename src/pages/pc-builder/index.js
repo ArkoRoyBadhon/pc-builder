@@ -1,9 +1,11 @@
 import RootLayout from "@/components/Layouts/RootLayout";
 import { Button, Divider, Menu, Modal } from "antd";
 import Link from "next/link";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "../../styles/pc-builder.module.css";
 import { useState } from "react";
+import { DeleteFilled } from "@ant-design/icons";
+import { removeFromPCBuilder } from "@/redux/features/pcBuilder/pcBuilderSlice";
 
 function isCategoryIncluded(products, categoryToCheck) {
   return products.find((product) => product.category === categoryToCheck);
@@ -11,6 +13,7 @@ function isCategoryIncluded(products, categoryToCheck) {
 
 const PCBuilder = () => {
   const { pcbuilder: pcdata } = useSelector((state) => state);
+  const dispatch = useDispatch()
   const [isModalOpen, setIsModalOpen] = useState(false);
   const products = pcdata.products || [];
   const showModal = () => {
@@ -176,6 +179,18 @@ const PCBuilder = () => {
                   <div>
                     <b>Category:</b> {product?.category}
                   </div>
+                  <div
+                    style={{
+                      marginTop: 10,
+                    }}
+                  >
+                    <div
+                      className={`${styles["delBtn"]}`}
+                      onClick={()=> dispatch(removeFromPCBuilder(product))}
+                    >
+                      <DeleteFilled className={`${styles["delBtnText"]}`} />{" "}
+                    </div>
+                  </div>
                 </div>
               </div>
             );
@@ -204,7 +219,7 @@ const PCBuilder = () => {
                 Create PC
               </Button>
               <Modal
-                title="Warning"
+                title="Success"
                 open={isModalOpen}
                 onOk={handleOk}
                 onCancel={handleCancel}

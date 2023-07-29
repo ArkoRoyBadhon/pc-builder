@@ -1,19 +1,40 @@
 .pcBuilderNav {
-    display: flex;
-    flex-direction: column;
-    background: rgb(190, 196, 236);
-    min-height: 100vh;
-    border-radius: 5px;
-    padding: 20px 20px;
+  display: flex;
+  flex-direction: column;
+  background: rgb(190, 196, 236);
+  min-height: 100vh;
+  border-radius: 5px;
+  padding: 20px 20px;
 }
 
 .pcBuilderNav a {
-    font-size: larger;
-    padding: 10px 20px;
-    font-weight: 600;
+  font-size: larger;
+  padding: 10px 20px;
+  font-weight: 600;
 }
 
 .pcBuilderNav a:hover {
-    background: #7e9be0;
-    color: beige;
+  background: #7e9be0;
+  color: beige;
+}
+
+.delBtn {
+  text-align: center;
+  border: 1px solid rgb(239, 163, 163);
+  width: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delBtnText{
+    color: red;
+}
+
+/* .delBtnText:hover {
+color: white;
+} */
+
+.delBtn:hover {
+    background: rgb(237, 166, 166);
+    transition: all;
 }
