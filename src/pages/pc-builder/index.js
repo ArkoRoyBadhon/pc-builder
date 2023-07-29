@@ -29,9 +29,7 @@ const PCBuilder = () => {
   return (
     <div className="pageHeight content-body">
       <div
-        style={{
-          display: "flex",
-        }}
+        className={`${styles["pc-builder-main"]}`}
       >
         <div className={`${styles["pcBuilderNav"]}`}>
           <Link
@@ -151,7 +149,7 @@ const PCBuilder = () => {
             )}
           </Link>
         </div>
-        <div style={{ marginLeft: "50px", marginTop: "40px", width: "600px" }}>
+        <div className={`${styles["pcBuilderBody"]}`}>
           <h4 style={{ marginBottom: 10 }}>Your PC Parts</h4>
           {products?.map((product, i) => {
             return (
@@ -195,7 +193,7 @@ const PCBuilder = () => {
               </div>
             );
           })}
-          <Divider />
+          <Divider  />
           <div
             style={{
               display: "flex",
@@ -213,6 +211,7 @@ const PCBuilder = () => {
                 onClick={showModal}
                 style={{
                   marginTop: "30px",
+                  marginBottom: "30px",
                   fontWeight: 600,
                 }}
               >
@@ -234,6 +233,7 @@ const PCBuilder = () => {
                 onClick={showModal}
                 style={{
                   marginTop: "30px",
+                  marginBottom: "30px",
                   fontWeight: 600,
                 }}
               >

@@ -1,3 +1,7 @@
+.pc-builder-main {
+    display: flex;
+}
+
 .pcBuilderNav {
   display: flex;
   flex-direction: column;
@@ -18,6 +22,12 @@
   color: beige;
 }
 
+.pcBuilderBody {
+    margin-left: 50px;
+    margin-top: 40px;
+    width: 600px
+}
+
 .delBtn {
   text-align: center;
   border: 1px solid rgb(239, 163, 163);
@@ -26,8 +36,8 @@
   cursor: pointer;
 }
 
-.delBtnText{
-    color: red;
+.delBtnText {
+  color: red;
 }
 
 /* .delBtnText:hover {
@@ -35,6 +45,20 @@ color: white;
 } */
 
 .delBtn:hover {
-    background: rgb(237, 166, 166);
-    transition: all;
+  background: rgb(237, 166, 166);
+  transition: all;
+}
+
+@media screen and (max-width: 480px) {
+  .pcBuilderNav {
+    min-height: 50vh;
+  }
+  .pc-builder-main {
+    flex-direction: column;
+  }
+  .pcBuilderBody {
+    margin-left: 10px;
+    margin-top: 40px;
+    width: fit-content
+}
 }
