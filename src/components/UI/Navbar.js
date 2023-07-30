@@ -186,7 +186,7 @@ const Navbar = () => {
               </p>
             </div>
           ) : (
-            <Link href="/signin">
+            <Link href="/login">
               <p
                 style={{ color: "white", fontWeight: 600, margin: "0px 10px" }}
               >
@@ -232,7 +232,7 @@ const Navbar = () => {
                 </p>
               </div>
             ) : (
-              <Link href="/signin">
+              <Link href="/login">
                 <Button
                   style={{
                     color: "black",

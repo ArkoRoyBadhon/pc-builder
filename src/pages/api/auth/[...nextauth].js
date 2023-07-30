@@ -13,10 +13,10 @@ export const authOptions = {
       clientSecret: process.env.GOOGLE_SECRET,
     }),
   ],
-
   pages: {
-    signIn: "/signin"
-  }
+    signIn: "https://pc-builder-snowy.vercel.app/login",
+    // signIn: "/login",
+  },
 };
 
 export default NextAuth(authOptions);
