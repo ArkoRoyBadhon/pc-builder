@@ -1,38 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## 🎉🎉🎉 Advance Thanks for Visiting my Repositiory 🎉🎉🎉
 
-First, run the development server:
+### Name: Pc Builder
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Live Link: https://pc-builder-snowy.vercel.app/
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Front End Github Code: https://github.com/ArkoRoyBadhon/pc-builder 
+### Backend Live Link: https://pc-builder-server-ashy.vercel.app
+### Backend Github Code: https://github.com/ArkoRoyBadhon/pc-builder-server
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+#### Technology Using
+- Next JS
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+##### Packages
+- Swiper JS
+- Next Auth
+- Ant Design
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### In this site we use protected route, So if you want to visit this route you must need to log in.
+### Without login you cannot get visit PC Builder page
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Social Login
+- Github
+- Google
 
-## Learn More
+## After login you can visit "PC Builder" route. and then you need to select 6 components or parts to build your own customized computer
 
-To learn more about Next.js, take a look at the following resources:
+### There are 6 category of components, each category initially has 3 components.
+### After Clicking a component then component Detail page opened
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+  
